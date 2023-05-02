@@ -1,4 +1,4 @@
-to run do elm reactor in root
+to run do `elm reactor` in root
 
 then run build cmd/main.go, everything should be there, no env vars
 
