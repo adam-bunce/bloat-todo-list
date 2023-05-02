@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+option go_package = "./todo_service";
+
+import "google/api/annotations.proto";
+
+service TodoService {
+  rpc CreateToDo (CreateToDoMessage) returns (ToDo) {
+    option (google.api.http) = {
+      post: "/v1/todo_service/todo"
+      body: "*"
+    };
+  }
+  rpc GetToDo (GetToDoMessage) returns (ToDo) {
+    option (google.api.http) = {
+      get: "/v1/todo_service/todo/{id}"
+    };
+  };
+  rpc GetAllToDos (GetAllToDosMessage) returns (ToDos) {
+    option (google.api.http) = {
+      get: "/v1/todo_service/todo"
+    };
+  }
+  // how would this work in http??????
+  rpc GetAllToDosStream (GetAllToDosMessage) returns (stream ToDo);
+  //
+  rpc UpdateToDo (UpdateToDoMessage) returns (ToDo) {
+    option (google.api.http) = {
+      put: "/v1/todo_service/todo/{id}"
+      body: "updated_message"
+    };
+  };
+  rpc DeleteToDo (DeleteToDoMessage) returns (ToDo) {
+    option (google.api.http) = {
+      delete: "/v1/todo_service/todo/{id}"
+    };
+  };
+  // TODO add a client stream and a bidirectional stream
+}
+
+message CreateToDoMessage {
+  string todo = 1;
+}
+
+message DeleteToDoMessage {
+  int32 id = 1;
+}
+
+message GetToDoMessage {
+  int32 id = 1;
+}
+
+message ToDo {
+  int32 id = 1;
+  string todo = 2;
+}
+
+message UpdateToDoMessage {
+  int32 id = 1;
+  string updated_message = 2;
+}
+
+message GetAllToDosMessage {}
+
+message ToDos {
+  repeated ToDo todos = 1;
+}
