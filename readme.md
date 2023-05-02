@@ -18,3 +18,5 @@ protoc -I .\domain\proto\ --go_out .\domain\proto\ --go_opt paths=source_relativ
 protoc -I .\domain\proto\ --go_out .\domain\proto\ --go_opt paths=source_relative --go-grpc_out .\domain\proto\ --go-grpc_opt paths=source_relative --grpc-gateway_out .\domain\pr
 oto\ --grpc-gateway_opt paths=source_relative .\domain\proto\todo_service.proto
 ```
+
+i think it's the bottom one which also generates the grpc-gateway stuff needed to do http requests
